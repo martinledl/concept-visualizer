@@ -14,7 +14,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
         <span>Concept Visualizer</span>
       </a>
       <nav className="header-actions" aria-label="Main navigation">
-        <a className="header-link" href={sitePath("/#library")}>
+        <a className="header-link" href={sitePath("/#catalogue")}>
           <BookOpen size={18} aria-hidden="true" />
           <span>Library</span>
         </a>

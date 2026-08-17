@@ -23,6 +23,8 @@ export default async function FoundationLessonPage({ params }: { params: Promise
   const { slug } = await params;
   const meta = getVisualization(slug);
   const lesson = foundationLessons[slug];
-  if (!meta || !lesson) notFound();
-  return <div className="lesson-page"><SiteHeader compact />{slug === "graphics-pipeline" ? <PipelineExplorer /> : <FoundationExplorer meta={meta} lesson={lesson} />}</div>;
+  if (!meta) notFound();
+  if (slug === "graphics-pipeline") return <div className="lesson-page"><SiteHeader compact /><PipelineExplorer /></div>;
+  if (!lesson) notFound();
+  return <div className="lesson-page"><SiteHeader compact /><FoundationExplorer meta={meta} lesson={lesson} /></div>;
 }

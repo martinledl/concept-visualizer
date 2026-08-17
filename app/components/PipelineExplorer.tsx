@@ -58,7 +58,7 @@ const stages = [
     title: "Generate fragments on the pixel grid",
     operation: "Rasterization",
     description: "Rasterization tests pixel sample locations against the projected faces. Covered samples create fragments for later shading and depth tests.",
-    note: "A fragment is a candidate pixel contribution—not automatically the final displayed pixel.",
+    note: "A fragment is a candidate pixel contribution, not automatically the final displayed pixel.",
     icon: Grid3X3,
   },
 ];
@@ -149,7 +149,7 @@ function PipelineCanvas({ stage, scene }: { stage: number; scene: PipelinePrimit
 }
 
 function formatPoint(point: Vec2 | Vec3 | undefined) {
-  if (!point) return "—";
+  if (!point) return "not available";
   const values = "z" in point ? [point.x, point.y, point.z] : [point.x, point.y];
   return values.map((value) => value.toFixed(2)).join(", ");
 }
@@ -211,7 +211,7 @@ export function PipelineExplorer() {
     <aside className="lesson-inspector pipeline-inspector">
       <section className="inspector-section step-explanation"><span className="step-kicker">What this stage does</span><div className="pipeline-inspector-title"><Icon size={20} aria-hidden="true" /><h2>{active.operation}</h2></div><p>{active.description}</p><div className="concept-note"><span>Practical takeaway</span><p>{active.note}</p></div></section>
       <section className="inspector-section"><p className="inspector-label">Follow vertex 1</p><div className="pipeline-value-list">{values.map((item, index) => <div className={index === Math.min(stage, 4) ? "is-current" : ""} key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div></section>
-      <section className="inspector-section final-preview-section"><p className="inspector-label">Final framebuffer preview</p><div className="final-pixel-preview" aria-label={`${hits.length} fragments in the final simplified framebuffer`}>{Array.from({ length: 84 }, (_, index) => { const column = index % 12; const row = Math.floor(index / 12); const match = hits.find((hit) => Math.floor(hit.column / (20 / 12)) === column && Math.floor(hit.row / (12 / 7)) === row); return <span key={index} className={match ? `hit-${match.primitive}` : ""} />; })}</div><p>Change the camera or scene above—the final pixels update at every stage.</p></section>
+      <section className="inspector-section final-preview-section"><p className="inspector-label">Final framebuffer preview</p><div className="final-pixel-preview" aria-label={`${hits.length} fragments in the final simplified framebuffer`}>{Array.from({ length: 84 }, (_, index) => { const column = index % 12; const row = Math.floor(index / 12); const match = hits.find((hit) => Math.floor(hit.column / (20 / 12)) === column && Math.floor(hit.row / (12 / 7)) === row); return <span key={index} className={match ? `hit-${match.primitive}` : ""} />; })}</div><p>Change the camera or scene above. The final pixels update at every stage.</p></section>
     </aside>
   </main>;
 }

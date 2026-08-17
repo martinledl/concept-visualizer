@@ -27,23 +27,26 @@ const steps = [
   {
     short: "Position",
     title: "Position the primitive",
+    operation: "Screen-space input",
     description:
       "A triangle reaches rasterization in screen space. Drag its vertices and notice that the geometry is still continuous; pixels have not been chosen yet.",
-    note: "The three vertices define the triangle boundary in image space.",
+    note: "Drag one vertex and watch the triangle area change before any samples are tested.",
   },
   {
     short: "Sample",
     title: "Test the sample locations",
+    operation: "Center-in-triangle test",
     description:
       "The rasterizer evaluates sample locations on the pixel grid. In this simplified model, a pixel becomes covered when its center lies inside the triangle.",
-    note: "Real rasterizers use precise edge rules so adjacent triangles agree at shared edges.",
+    note: "Move an edge across a sample center and watch that sample switch between outside and inside.",
   },
   {
     short: "Shade",
     title: "Generate fragments",
+    operation: "Fragment generation",
     description:
       "Each covered sample produces a fragment: a candidate contribution to a pixel. Later stages can still reject it, for example during depth testing.",
-    note: "A fragment is not automatically a final pixel. It must pass the remaining pipeline tests.",
+    note: "Change the grid resolution and compare how many fragments the same triangle creates.",
   },
 ];
 
@@ -243,13 +246,7 @@ function RasterizationExplorerContent({
                 <span>{index + 1}</span>
                 <span>
                   <strong>{item.short}</strong>
-                  <small>
-                    {index === 0
-                      ? "Screen-space geometry"
-                      : index === 1
-                        ? "Pixel center tests"
-                        : "Candidate pixels"}
-                  </small>
+                  <small>{item.operation}</small>
                 </span>
               </button>
             </li>
@@ -279,6 +276,14 @@ function RasterizationExplorerContent({
               {copied ? "Copied" : "Share state"}
             </button>
           </div>
+        </div>
+
+        <div className="lesson-flow-strip">
+          <div><span>Input</span><strong>3 screen-space vertices</strong></div>
+          <ArrowRight aria-hidden="true" />
+          <div className="is-operation"><span>Operation</span><strong>{activeStep.operation}</strong></div>
+          <ArrowRight aria-hidden="true" />
+          <div aria-live="polite"><span>Result</span><strong>{step === 0 ? `triangle area ${(triangleArea(vertices) * resolution * rows).toFixed(1)} px2` : step === 1 ? `${covered.length} sample centers inside` : `${covered.length} candidate fragments`}</strong></div>
         </div>
 
         <div className="canvas-frame">
@@ -454,7 +459,7 @@ function RasterizationExplorerContent({
               <h2>{activeStep.title}</h2>
               <p>{activeStep.description}</p>
               <div className="concept-note">
-                <span>Keep in mind</span>
+                <span>Try this</span>
                 <p>{activeStep.note}</p>
               </div>
             </div>

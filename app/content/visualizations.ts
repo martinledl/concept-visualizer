@@ -110,7 +110,7 @@ export const visualizations: VisualizationMeta[] = [
     tags: ["Z-buffer", "Occlusion", "Fragments"],
     studyMinutes: 9,
     difficulty: "Foundational",
-    interaction: "Change draw order",
+    interaction: "Change a surface depth",
     source: { title: sourceTitle, pages: "17-19" },
   },
   {

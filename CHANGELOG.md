@@ -13,6 +13,9 @@ All notable changes to this project are documented here. The format follows Keep
 
 ### Changed
 
+- Reworked every lesson around a concrete input, a named operation, live values, and a visible result.
+- Reviewed public copy and contributor documentation for clearer, more natural language.
+- Replaced the old roadmap README with a concise catalogue and contribution guide.
 - Removed course, chapter, and slide references from the public interface.
 - Reworked the homepage hero and catalogue around a general-purpose concept library.
 - Removed the local OpenAI Sites deployment binding in favor of GitHub Pages.

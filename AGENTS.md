@@ -1,56 +1,57 @@
-# AI Authoring Guide
+# AI authoring guide
 
-This repository is designed to be extended with AI coding tools. Follow this guide whenever adding or changing a visualization.
+Use this guide whenever an AI coding tool adds or changes a lesson.
 
-## Non-negotiable product rules
+## Teaching contract
 
-- Teach one mental model per lesson.
-- Make causality visible: each control must change something meaningful immediately.
-- Keep source claims traceable to lecture pages or another named source.
-- Separate deterministic concept logic from UI rendering.
-- Do not add a universal visualization abstraction merely to reduce file count.
-- Use shared colors, typography, controls, and teaching patterns from the design system.
-- Support pointer, keyboard, and single-click alternatives to dragging.
-- Preserve reduced-motion behavior, visible focus, and 44 by 44 px touch targets.
-- Never publish an AI-generated explanation as verified without human subject review.
+Every lesson must show a concrete input, a named operation, and a visible result. The picture, live values, and explanation must come from the same state.
 
-## Definition of a visualization package
+- Teach one mental model at a time.
+- Let every control change something meaningful immediately.
+- Use a real example instead of a decorative diagram.
+- Explain what the operation does in plain language.
+- Give the learner a useful experiment or edge case to try.
+- Keep deterministic concept logic separate from rendering.
+- Do not force unrelated lessons into one rendering abstraction.
+- Never present AI-written factual content as verified without human subject review.
 
-A complete concept has:
+## A complete lesson
 
-- Metadata in `app/content/visualizations.ts`.
-- A stable route under `app/learn/<slug>/`.
-- A pure model module with initial state, state transitions, and serialization where useful.
-- A client visualization component.
-- A concise guided explanation and an explore mode when the concept benefits from both.
-- Source slides, glossary terms, keyboard instructions, reset behavior, and meaningful presets.
-- Unit tests for normal behavior and edge cases.
+A contribution needs:
 
-As more lessons are added, move each mature concept into `visualizations/<slug>/` with `meta.ts`, `model.ts`, `Visualization.tsx`, `presets.ts`, and `model.test.ts`. Do this when the second visualization is implemented, when the shared boundary is evident.
+- Catalogue metadata and a stable route.
+- A short guided sequence and direct exploration when useful.
+- A pure model with tests for normal and edge cases.
+- Live values that expose the calculation or decision.
+- Reset behavior and meaningful defaults.
+- Pointer, keyboard, and single-click alternatives to dragging.
+- Visible focus, reduced-motion support, and touch targets of at least 44 by 44 px.
+- Source notes kept out of the public course structure.
+
+Create a dedicated folder under `visualizations/<slug>/` when a lesson needs several local files or a custom renderer. Share design tokens, teaching patterns, and controls. Keep lesson-specific drawing logic local.
 
 ## Rendering choices
 
-- Prefer semantic HTML and CSS for application layout.
-- Use SVG for interactive geometry, axes, and a moderate number of marks.
+- Use semantic HTML and CSS for the application shell.
+- Use SVG for interactive geometry and diagrams.
 - Use Canvas for dense pixel or particle work.
-- Use WebGL only for real 3D interaction or scale that SVG and Canvas cannot support.
-- Keep renderers local to lessons. Share teaching and control primitives, not low-level rendering assumptions.
+- Use WebGL only when real 3D interaction or scale requires it.
 
-## Change workflow
+## Workflow
 
-1. Read the relevant source material completely.
-2. Write a teaching brief: misconception, manipulated variable, visible consequence, edge cases.
-3. Implement or update the pure model and tests first.
+1. Read the relevant source material.
+2. Write the learning question, input, operation, result, and edge cases.
+3. Implement the model and tests first.
 4. Build the smallest complete interaction.
-5. Add explanation, presets, responsive behavior, theme support, and accessibility.
-6. Verify at 375, 768, 1024, and 1440 px.
+5. Add concise copy, responsive behavior, theme support, and accessibility.
+6. Check 375, 768, 1024, and 1440 px widths.
 7. Run `npm run check`.
 8. Update `CHANGELOG.md` under `Unreleased`.
 
-## Git conventions
+## Git
 
-- Branches: `feat/<topic>`, `fix/<topic>`, `docs/<topic>`.
-- Commits: Conventional Commits, for example `feat(rasterization): add edge-rule preset`.
-- Pull requests should contain one coherent concept or platform change.
-- Never mix a lesson implementation with unrelated formatting or dependency churn.
-- Versions follow Semantic Versioning. See `CONTRIBUTING.md`.
+- Use focused branches such as `feat/clipping-lab` or `fix/theme-toggle`.
+- Use Conventional Commits, such as `feat(rasterization): add edge-rule preset`.
+- Keep each pull request to one coherent lesson or platform change.
+- Avoid unrelated formatting or dependency churn.
+- Follow Semantic Versioning as described in `CONTRIBUTING.md`.

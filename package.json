@@ -2,7 +2,7 @@
   "name": "concept-visualizer",
   "version": "0.1.0",
   "private": true,
-  "description": "Interactive, lecture-grounded visual explanations for difficult concepts.",
+  "description": "Interactive visual explanations for difficult concepts.",
   "license": "MIT",
   "engines": {
     "node": ">=22.13.0"

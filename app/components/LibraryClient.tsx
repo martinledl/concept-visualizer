@@ -88,8 +88,8 @@ export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
             </div>
           </div>
           <div className="atlas-caption">
-            <span>One connected mental model</span>
-            <span>Every control has a visible consequence</span>
+            <span>Follow one example from input to image</span>
+            <span>Change a value and inspect the result</span>
           </div>
         </div>
       </section>
