@@ -1,20 +1,19 @@
 # Concept Visualizer
 
-Concept Visualizer is an open-source library of interactive explanations for difficult university concepts. The first course is Visual Computing Fundamentals, beginning with a hands-on Rasterization Explorer grounded in the supplied Chapter 1 lecture material.
+Concept Visualizer is an open-source library of interactive explanations for difficult concepts. It is organized by broad fields and topics so learners can explore ideas independently of any particular course or institution.
 
 The project favors small, accurate visual models over decorative animation. Every lesson should let a learner change a meaningful variable, observe the result, and connect that result to a concise explanation.
 
 ## Current release
 
-Version `0.1.0` includes:
+The current library includes:
 
-- A searchable Chapter 1 concept library.
-- A complete Rasterization Explorer.
+- A searchable, field-and-topic based concept catalogue.
+- Ten interactive computer graphics lessons.
 - Guided and free-exploration learning modes.
-- Draggable and keyboard-operable triangle vertices.
-- Pixel-center sampling, coverage, grid resolution, live measurements, and shareable states.
+- Pointer, touch, keyboard, sliders, toggles, and reset controls where appropriate.
 - Light and dark themes saved on the device.
-- A roadmap for nine additional Chapter 1 visualizations.
+- Responsive catalogue and lesson layouts for phones, tablets, and desktops.
 
 ## Run locally
 
@@ -38,8 +37,9 @@ This runs linting, mathematical model tests, and the production build.
 ## Architecture
 
 - `app/content/visualizations.ts` is the library manifest.
-- `app/lib/rasterization.ts` contains deterministic math and URL-state logic.
-- `app/components/RasterizationExplorer.tsx` contains the lesson interaction and rendering.
+- `app/content/foundation-lessons.ts` contains guided teaching content.
+- `app/lib/` contains deterministic concept models and URL-state logic.
+- `app/components/` contains catalogue and lesson interactions.
 - `app/learn/[slug]` contains lesson routes.
 - `design-system/concept-visualizer/MASTER.md` records shared visual decisions.
 - `PROJECT_PLAN.md` contains the complete roadmap and visualization contract.
@@ -51,7 +51,7 @@ SVG is used for interactive coordinate geometry, Canvas should be used for pixel
 
 Before implementing a new lesson:
 
-1. Inspect the relevant lecture pages and diagrams.
+1. Inspect the relevant primary source material and diagrams.
 2. Write one primary learning objective.
 3. Identify the learner-controlled variable and its visible consequence.
 4. Add validated metadata to the library manifest.
@@ -76,9 +76,7 @@ Do not run a version command until the changelog and release scope are ready, be
 
 ## Deployment
 
-The application builds to a Cloudflare-compatible worker through Vinext. `.openai/hosting.json` intentionally declares no database or object storage because the initial library is static and Git-backed.
-
-### GitHub Pages
+The public site is deployed with GitHub Pages.
 
 The repository also includes `.github/workflows/pages.yml`. It builds and packages a separate static export with the correct project-site paths, then deploys `dist/client` whenever `main` changes.
 
@@ -89,7 +87,7 @@ To enable it once:
 3. Under **Build and deployment**, select **GitHub Actions** as the source.
 4. Push `main`, or manually run **Deploy GitHub Pages** from the Actions tab.
 
-The resulting project URL is `https://martinledl.github.io/concept-visualizer/`. The existing Cloudflare-compatible build remains unchanged when `GITHUB_PAGES` is not set.
+The resulting project URL is `https://martinledl.github.io/concept-visualizer/`.
 
 ## License
 

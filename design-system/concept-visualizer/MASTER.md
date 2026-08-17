@@ -21,6 +21,7 @@ Design dials:
 4. Controls are visible, labeled, and immediately responsive.
 5. Decorative effects never compete with the concept.
 6. Guided and explore modes share the same model state.
+7. Public navigation is organized by durable fields and topics, never by a specific course syllabus.
 
 ## Color tokens
 

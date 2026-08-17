@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://concept-visualizer.martinledl920.chatgpt.site";
+  "https://martinledl.github.io/concept-visualizer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Interactive, lecture-grounded visual explanations for difficult concepts.",
+    "Interactive visual explanations that turn difficult concepts into experiments.",
   icons: {
     icon: new URL("favicon.svg", `${siteUrl.replace(/\/$/, "")}/`),
     shortcut: new URL("favicon.svg", `${siteUrl.replace(/\/$/, "")}/`),
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Concept Visualizer",
-    description: "See the algorithm, not just the slide.",
+    description: "Build intuition by changing the system.",
     images: [
       {
         url: new URL("og.png", `${siteUrl.replace(/\/$/, "")}/`),
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Concept Visualizer",
-    description: "See the algorithm, not just the slide.",
+    description: "Build intuition by changing the system.",
     images: [new URL("og.png", `${siteUrl.replace(/\/$/, "")}/`)],
   },
 };

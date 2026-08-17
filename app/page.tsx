@@ -22,8 +22,8 @@ export default function Home() {
           <p>Open-source visual explanations for difficult ideas.</p>
         </div>
         <div className="footer-stats">
-          <span>{availableCount} interactive lesson</span>
-          <span>{visualizations.length - availableCount} in the roadmap</span>
+          <span>{availableCount} interactive lessons</span>
+          <span>More fields coming over time</span>
           <span>v0.1.0</span>
         </div>
       </footer>

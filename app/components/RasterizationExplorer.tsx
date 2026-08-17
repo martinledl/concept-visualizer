@@ -212,7 +212,7 @@ function RasterizationExplorerContent({
     <main className="lesson-shell">
       <aside className="lesson-outline" aria-label="Lesson outline">
         <div className="outline-heading">
-          <span className="lesson-index">01</span>
+          <span className="lesson-index">05</span>
           <div>
             <p>Rendering</p>
             <h1>Rasterization Explorer</h1>
@@ -255,10 +255,8 @@ function RasterizationExplorerContent({
             </li>
           ))}
         </ol>
-        <div className="source-note">
-          <span>Lecture source</span>
-          <strong>Chapter 1 · Slides 15-16</strong>
-          <p>Graphics & Visualization: Principles & Algorithms</p>
+        <div className="lesson-mobile-note">
+          Designed for touch, keyboard, and desktop input.
         </div>
       </aside>
 

@@ -4,7 +4,7 @@
 
 Concept Visualizer is a growing library of interactive explanations for difficult university concepts. Each lesson combines a focused explanation, a manipulable visual model, and a small set of guided experiments. The product should feel closer to a scientific instrument or an excellent interactive textbook than to a course-management system.
 
-The initial subject is Visual Computing Fundamentals. The first source is `CGVIZ_Chapter_1_2026.pdf`, Chapter 1 of *Graphics & Visualization: Principles & Algorithms* by Theoharis Theoharis.
+The first content seed comes from visual computing material, but the public product is organized around durable fields, topics, and concepts rather than a particular institution, course, or syllabus.
 
 ## Product principles
 
@@ -122,7 +122,7 @@ Adding a concept should follow a repeatable workflow:
 
 The repository should include an `AGENTS.md` authoring guide and a `new-visualization` generator so an AI coding tool receives the same constraints every time.
 
-## Chapter 1 visualization roadmap
+## Initial computer graphics collection
 
 ### Tier 1: core graphics pipeline
 
@@ -165,13 +165,13 @@ Start with **Rasterization Explorer** because it is understandable in 2D, visual
 - Math/model tests.
 - Responsive and keyboard interaction.
 
-Once this slice is solid, use it to define the reusable visualization template. Build the Graphics Pipeline Map second so it can connect the growing set of Chapter 1 lessons.
+This first slice defines the reusable learning shell and interaction vocabulary for the broader catalogue.
 
 ## Library and discovery model
 
 The first library should be generated from local metadata and support:
 
-- Browse by course, chapter, topic, and prerequisite.
+- Browse by field, topic, and prerequisite.
 - Search titles, summaries, glossary terms, and aliases such as ISC/viewport/device/screen coordinates.
 - Status labels: draft, reviewed, and verified.
 - Related concepts and a prerequisite trail.
@@ -224,7 +224,7 @@ Initialize the application, encode the selected tokens, create the lesson and li
 
 Build Rasterization Explorer end to end, including model tests, guided steps, presets, URL state, responsive behavior, and accessibility. Use lessons from this slice to refine the shared contract.
 
-### Phase 3 - Chapter 1 core set
+### Phase 3 - initial computer graphics set
 
 Build the Graphics Pipeline Map, Clipping Lab, Viewport Transform, Winding/Culling, Drawing Order/Depth Test, and Frame Timing/Tearing. Add related-concept navigation as the graph grows.
 
@@ -243,7 +243,7 @@ Only after the content library has traction, evaluate cloud progress, personal n
 - Automated ingestion that publishes unreviewed lecture content.
 - A universal rendering engine.
 - Social features, points, streaks, or leaderboards.
-- Supporting every course before the Chapter 1 workflow is proven.
+- Supporting every field before the initial authoring workflow is proven.
 
 ## Decisions needed before implementation
 
@@ -251,4 +251,3 @@ Only after the content library has traction, evaluate cloud progress, personal n
 2. Decide whether the default experience is light, dark, or follows the device.
 3. Decide whether lessons primarily use a guided sequence, free exploration, or an easy switch between both.
 4. Confirm whether this is initially a personal local tool or a public site intended for other students.
-
