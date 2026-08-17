@@ -16,6 +16,7 @@ All notable changes to this project are documented here. The format follows Keep
 - Removed course, chapter, and slide references from the public interface.
 - Reworked the homepage hero and catalogue around a general-purpose concept library.
 - Removed the local OpenAI Sites deployment binding in favor of GitHub Pages.
+- Rebuilt the graphics pipeline lesson around a concrete triangle-and-quad scene with real transforms, clipping, viewport mapping, and rasterization.
 
 ## 0.1.0 - 2026-08-17
 

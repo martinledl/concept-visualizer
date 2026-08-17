@@ -2242,3 +2242,410 @@ a {
   .z-plane{left:4%;width:270px;height:140px}
   .buffer-lab,.timing-lab,.obj-lab{grid-template-columns:1fr;gap:20px}.buffer-grid{width:100%}.memory-stack strong{font-size:24px}.screen-scan{width:100%}.timing-track{display:none}.timing-lab>strong{grid-column:1}.obj-lab pre{font-size:10px}.mesh-mini{width:220px;height:200px;margin:auto}
 }
+
+/* Practical graphics pipeline lesson */
+
+.pipeline-lesson-shell {
+  grid-template-columns: 238px minmax(620px, 1fr) 322px;
+}
+
+.pipeline-outline {
+  padding-inline: 18px;
+}
+
+.pipeline-scene-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 24px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink-faint);
+  font-size: 10px;
+}
+
+.pipeline-scene-key span {
+  width: 9px;
+  height: 9px;
+  margin-left: 5px;
+  border-radius: 2px;
+}
+
+.pipeline-scene-key span:first-child { margin-left: 0; }
+.key-triangle { background: var(--coral); }
+.key-quad { background: var(--primary); }
+
+.pipeline-step-list {
+  margin-top: 16px;
+}
+
+.pipeline-step-list button {
+  min-height: 58px;
+}
+
+.pipeline-step-list li:not(:last-child)::after {
+  top: 42px;
+}
+
+.pipeline-workspace {
+  padding-inline: clamp(18px, 2.4vw, 36px);
+}
+
+.pipeline-object-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.pipeline-object-picker > span {
+  margin-right: 3px;
+  color: var(--ink-faint);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pipeline-object-picker button {
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.pipeline-object-picker button:hover,
+.pipeline-object-picker button.is-active {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+}
+
+.pipeline-canvas-frame {
+  margin-top: 12px;
+}
+
+.pipeline-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 390px;
+  max-height: min(55vh, 560px);
+  background: var(--surface-soft);
+}
+
+.pipeline-primitive {
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.primitive-triangle {
+  fill: color-mix(in srgb, var(--coral) 50%, transparent);
+  stroke: var(--coral);
+}
+
+.primitive-quad {
+  fill: color-mix(in srgb, var(--primary) 40%, transparent);
+  stroke: var(--primary);
+}
+
+.primitive-back-face {
+  fill: color-mix(in srgb, var(--ink-faint) 14%, transparent);
+  stroke: var(--ink-faint);
+  stroke-dasharray: 6 5;
+}
+
+.pipeline-primitive.is-secondary {
+  opacity: 0.42;
+}
+
+.pipeline-primitive.is-unclipped {
+  fill: none;
+  opacity: 0.35;
+  stroke-dasharray: 5 4;
+}
+
+.pipeline-vertex {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.pipeline-coordinate,
+.pipeline-depth-label,
+.canonical-label,
+.pipeline-object-label {
+  fill: var(--ink-soft);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+}
+
+.pipeline-object-label {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 650;
+  text-anchor: middle;
+}
+
+.local-axis,
+.pipeline-axes line,
+.canonical-axis {
+  stroke: var(--grid-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.local-axis,
+.canonical-axis {
+  stroke-dasharray: 3 4;
+}
+
+.pipeline-axes text {
+  fill: var(--ink-faint);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+}
+
+.camera-origin path {
+  fill: var(--ink);
+}
+
+.camera-origin text {
+  fill: var(--ink-faint);
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.canonical-window,
+.viewport-window {
+  fill: var(--surface);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.viewport-window {
+  fill: var(--surface);
+  stroke: var(--primary);
+}
+
+.culled-mark polygon {
+  fill: color-mix(in srgb, var(--ink-faint) 10%, transparent);
+  stroke: var(--ink-faint);
+  stroke-dasharray: 5 4;
+}
+
+.culled-mark line {
+  stroke: var(--ink-faint);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.culled-mark text {
+  fill: var(--ink-faint);
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.pipeline-pixel {
+  fill: var(--surface);
+  stroke: var(--grid);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.pipeline-pixel.hit-triangle,
+.final-pixel-preview .hit-triangle {
+  fill: color-mix(in srgb, var(--coral) 52%, var(--surface));
+  background: color-mix(in srgb, var(--coral) 52%, var(--surface));
+}
+
+.pipeline-pixel.hit-quad,
+.final-pixel-preview .hit-quad {
+  fill: color-mix(in srgb, var(--primary) 45%, var(--surface));
+  background: color-mix(in srgb, var(--primary) 45%, var(--surface));
+}
+
+.pipeline-sample {
+  fill: var(--grid-strong);
+  opacity: 0.48;
+}
+
+.pipeline-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.pipeline-controls .range-control {
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.pipeline-inspector-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  color: var(--primary);
+}
+
+.pipeline-inspector-title h2 {
+  margin: 0;
+  color: var(--ink);
+}
+
+.pipeline-value-list {
+  margin-top: 15px;
+}
+
+.pipeline-value-list > div {
+  display: grid;
+  min-height: 46px;
+  align-content: center;
+  gap: 2px;
+  padding: 7px 9px;
+  border-top: 1px solid var(--border);
+  color: var(--ink-faint);
+}
+
+.pipeline-value-list > div.is-current {
+  border-radius: 7px;
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+}
+
+.pipeline-value-list span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.pipeline-value-list strong {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+}
+
+.final-pixel-preview {
+  display: grid;
+  aspect-ratio: 12 / 7;
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: 15px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-soft);
+}
+
+.final-pixel-preview span {
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  background: var(--surface);
+}
+
+.final-preview-section > p:last-child {
+  margin: 11px 0 0;
+  color: var(--ink-faint);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1260px) {
+  .pipeline-lesson-shell {
+    grid-template-columns: 210px minmax(540px, 1fr);
+  }
+
+  .pipeline-inspector {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  .pipeline-inspector .inspector-section {
+    border-right: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 820px) {
+  .pipeline-lesson-shell {
+    display: block;
+  }
+
+  .pipeline-scene-key {
+    display: none;
+  }
+
+  .pipeline-step-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    margin-top: 12px;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .pipeline-step-list li {
+    flex: 0 0 128px;
+  }
+
+  .pipeline-step-list button {
+    min-height: 50px;
+  }
+
+  .pipeline-inspector {
+    display: block;
+  }
+
+  .pipeline-inspector .inspector-section {
+    border-right: 0;
+  }
+
+  .pipeline-svg {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pipeline-workspace {
+    padding-inline: 12px;
+  }
+
+  .pipeline-object-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pipeline-object-picker > span {
+    grid-column: 1 / -1;
+  }
+
+  .pipeline-object-picker button {
+    min-height: 44px;
+    padding-inline: 7px;
+    font-size: 10px;
+  }
+
+  .pipeline-svg {
+    min-height: 270px;
+  }
+
+  .pipeline-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline-canvas-frame .canvas-label-row span:last-child {
+    display: none;
+  }
+}

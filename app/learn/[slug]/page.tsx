@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FoundationExplorer } from "../../components/FoundationExplorer";
+import { PipelineExplorer } from "../../components/PipelineExplorer";
 import { SiteHeader } from "../../components/SiteHeader";
 import { foundationLessons, foundationLessonSlugs } from "../../content/foundation-lessons";
 import { getVisualization } from "../../content/visualizations";
@@ -23,5 +24,5 @@ export default async function FoundationLessonPage({ params }: { params: Promise
   const meta = getVisualization(slug);
   const lesson = foundationLessons[slug];
   if (!meta || !lesson) notFound();
-  return <div className="lesson-page"><SiteHeader compact /><FoundationExplorer meta={meta} lesson={lesson} /></div>;
+  return <div className="lesson-page"><SiteHeader compact />{slug === "graphics-pipeline" ? <PipelineExplorer /> : <FoundationExplorer meta={meta} lesson={lesson} />}</div>;
 }
