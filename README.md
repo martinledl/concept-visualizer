@@ -78,6 +78,19 @@ Do not run a version command until the changelog and release scope are ready, be
 
 The application builds to a Cloudflare-compatible worker through Vinext. `.openai/hosting.json` intentionally declares no database or object storage because the initial library is static and Git-backed.
 
+### GitHub Pages
+
+The repository also includes `.github/workflows/pages.yml`. It builds and packages a separate static export with the correct project-site paths, then deploys `dist/client` whenever `main` changes.
+
+To enable it once:
+
+1. Open the repository on GitHub.
+2. Go to **Settings > Pages**.
+3. Under **Build and deployment**, select **GitHub Actions** as the source.
+4. Push `main`, or manually run **Deploy GitHub Pages** from the Actions tab.
+
+The resulting project URL is `https://martinledl.github.io/concept-visualizer/`. The existing Cloudflare-compatible build remains unchanged when `GITHUB_PAGES` is not set.
+
 ## License
 
 MIT. Lecture material remains the property of its respective author or institution; this repository stores original explanations and code, not copies of the source slides.

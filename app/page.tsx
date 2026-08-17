@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Explore rasterization, clipping, depth, image buffers, and the graphics pipeline through interactive visual explanations.",
 };
 
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <div className="site-page">

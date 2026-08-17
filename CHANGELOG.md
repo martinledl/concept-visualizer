@@ -7,6 +7,7 @@ All notable changes to this project are documented here. The format follows Keep
 ### Added
 
 - Open-source contribution and automated quality-check foundations.
+- Static export and GitHub Actions deployment for GitHub Pages.
 
 ## 0.1.0 - 2026-08-17
 

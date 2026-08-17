@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   ArrowRight,
   Clock3,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { VisualizationMeta } from "../content/visualizations";
+import { sitePath } from "../lib/site-path";
 
 const filters = ["All", "Pipeline", "Rendering", "Visibility", "Images"];
 
@@ -54,10 +54,10 @@ export function LibraryClient({
             and watching every stage respond.
           </p>
           <div className="hero-actions">
-            <Link className="primary-button" href="/learn/rasterization">
+            <a className="primary-button" href={sitePath("/learn/rasterization/")}>
               Open Rasterization Explorer
               <ArrowRight size={18} aria-hidden="true" />
-            </Link>
+            </a>
             <a className="text-link" href="#library">
               Browse Chapter 1
             </a>
@@ -174,13 +174,13 @@ export function LibraryClient({
             );
 
             return item.status === "available" ? (
-              <Link
+              <a
                 className="concept-card concept-card-available"
-                href={`/learn/${item.slug}`}
+                href={sitePath(`/learn/${item.slug}/`)}
                 key={item.slug}
               >
                 {content}
-              </Link>
+              </a>
             ) : (
               <article className="concept-card" key={item.slug}>
                 {content}

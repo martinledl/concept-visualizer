@@ -12,10 +12,11 @@ import {
   Grid3X3,
   RotateCcw,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import {
   coveredCells,
   defaultRasterState,
+  parseRasterState,
   serializeRasterState,
   triangleArea,
   type Point,
@@ -49,6 +50,19 @@ const steps = [
 const vertexNames = ["A", "B", "C"];
 const plot = { x: 38, y: 34, width: 644, height: 430 };
 
+function subscribeToLocation(callback: () => void) {
+  window.addEventListener("popstate", callback);
+  return () => window.removeEventListener("popstate", callback);
+}
+
+function getLocationSearch() {
+  return window.location.search;
+}
+
+function getServerSearch() {
+  return "";
+}
+
 function Toggle({
   checked,
   label,
@@ -75,6 +89,29 @@ function Toggle({
 }
 
 export function RasterizationExplorer({
+  initialState,
+}: {
+  initialState: RasterState;
+}) {
+  const search = useSyncExternalStore(
+    subscribeToLocation,
+    getLocationSearch,
+    getServerSearch,
+  );
+  const restoredState = useMemo(() => {
+    if (!search) return initialState;
+    return parseRasterState(Object.fromEntries(new URLSearchParams(search)));
+  }, [initialState, search]);
+
+  return (
+    <RasterizationExplorerContent
+      key={search}
+      initialState={restoredState}
+    />
+  );
+}
+
+function RasterizationExplorerContent({
   initialState,
 }: {
   initialState: RasterState;
