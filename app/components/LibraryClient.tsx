@@ -1,13 +1,16 @@
 "use client";
 
 import {
+  AudioWaveform,
   ArrowRight,
   BookOpen,
   Clock3,
   Compass,
   Grid3X3,
   Layers3,
+  Radio,
   Search,
+  SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -19,14 +22,27 @@ const topicIcons = {
   "Rasterization & Visibility": Grid3X3,
   "Images & Display": Layers3,
   "Geometry & Models": BookOpen,
+  "Signals & Sampling": Radio,
+  "Systems & Filters": SlidersHorizontal,
+  "Frequency Analysis": AudioWaveform,
+};
+
+const fieldDescriptions = {
+  "Computer Graphics": "How models, geometry, pixels, memory, and displays work together to form images.",
+  "Signal Processing": "How continuous phenomena become samples, filtered outputs, and frequency representations.",
 };
 
 export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
   const [query, setQuery] = useState("");
+  const [field, setField] = useState("All fields");
   const [topic, setTopic] = useState("All topics");
-  const topics = useMemo(
-    () => ["All topics", ...Array.from(new Set(items.map((item) => item.topic)))],
+  const fields = useMemo(
+    () => ["All fields", ...Array.from(new Set(items.map((item) => item.field)))],
     [items],
+  );
+  const topics = useMemo(
+    () => ["All topics", ...Array.from(new Set(items.filter((item) => field === "All fields" || item.field === field).map((item) => item.topic)))],
+    [field, items],
   );
 
   const filteredItems = useMemo(() => {
@@ -36,11 +52,17 @@ export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
         .join(" ")
         .toLowerCase();
       return (
+        (field === "All fields" || item.field === field) &&
         (topic === "All topics" || item.topic === topic) &&
         (!normalizedQuery || haystack.includes(normalizedQuery))
       );
     });
-  }, [items, query, topic]);
+  }, [field, items, query, topic]);
+
+  const groupedItems = useMemo(() => Array.from(new Set(filteredItems.map((item) => item.field))).map((groupField) => ({
+    field: groupField,
+    items: filteredItems.filter((item) => item.field === groupField),
+  })), [filteredItems]);
 
   return (
     <>
@@ -70,7 +92,7 @@ export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
         <div className="concept-atlas" aria-label="Interactive concept map preview">
           <div className="atlas-topline">
             <span>Concept atlas</span>
-            <span className="live-dot">10 interactive lessons</span>
+            <span className="live-dot">{items.length} interactive lessons</span>
           </div>
           <div className="atlas-canvas" aria-hidden="true">
             <span className="atlas-line atlas-line-a" />
@@ -107,13 +129,20 @@ export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
           </div>
         </div>
 
-        <div className="field-heading">
-          <span className="field-index">01</span>
-          <div><span>Field</span><h3>Computer Graphics</h3></div>
-          <p>How models, geometry, pixels, memory, and displays work together to form images.</p>
-        </div>
-
         <div className="catalogue-tools">
+          <div className="field-tabs" aria-label="Filter by field">
+            {fields.map((item) => (
+              <button
+                type="button"
+                key={item}
+                className={field === item ? "field-tab is-active" : "field-tab"}
+                onClick={() => { setField(item); setTopic("All topics"); }}
+                aria-pressed={field === item}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
           <div className="topic-tabs" aria-label="Filter by topic">
             {topics.map((item) => (
               <button
@@ -139,35 +168,42 @@ export function LibraryClient({ items }: { items: VisualizationMeta[] }) {
           </label>
         </div>
 
-        <div className="concept-list">
-          {filteredItems.map((item) => {
-            const TopicIcon = topicIcons[item.topic as keyof typeof topicIcons] ?? Compass;
-            return (
-              <a className="catalogue-card" href={sitePath(`/learn/${item.slug}/`)} key={item.slug}>
-                <div className="catalogue-card-index">{item.number}</div>
-                <div className="catalogue-card-icon"><TopicIcon size={20} aria-hidden="true" /></div>
-                <div className="catalogue-card-copy">
-                  <span>{item.topic}</span>
-                  <h4>{item.shortTitle}</h4>
-                  <p>{item.summary}</p>
-                </div>
-                <div className="catalogue-card-meta">
-                  <span><Clock3 size={14} aria-hidden="true" /> {item.studyMinutes} min</span>
-                  <span>{item.difficulty}</span>
-                  <span>{item.interaction}</span>
-                </div>
-                <ArrowRight className="catalogue-card-arrow" size={20} aria-hidden="true" />
-              </a>
-            );
-          })}
-        </div>
+        {groupedItems.map((group, groupIndex) => <section className="catalogue-field" key={group.field} aria-labelledby={`field-${groupIndex}`}>
+          <div className="field-heading">
+            <span className="field-index">{String(groupIndex + 1).padStart(2, "0")}</span>
+            <div><span>Field</span><h3 id={`field-${groupIndex}`}>{group.field}</h3></div>
+            <p>{fieldDescriptions[group.field as keyof typeof fieldDescriptions]}</p>
+          </div>
+          <div className="concept-list">
+            {group.items.map((item) => {
+              const TopicIcon = topicIcons[item.topic as keyof typeof topicIcons] ?? Compass;
+              return (
+                <a className="catalogue-card" href={sitePath(`/learn/${item.slug}/`)} key={item.slug}>
+                  <div className="catalogue-card-index">{item.number}</div>
+                  <div className="catalogue-card-icon"><TopicIcon size={20} aria-hidden="true" /></div>
+                  <div className="catalogue-card-copy">
+                    <span>{item.topic}</span>
+                    <h4>{item.shortTitle}</h4>
+                    <p>{item.summary}</p>
+                  </div>
+                  <div className="catalogue-card-meta">
+                    <span><Clock3 size={14} aria-hidden="true" /> {item.studyMinutes} min</span>
+                    <span>{item.difficulty}</span>
+                    <span>{item.interaction}</span>
+                  </div>
+                  <ArrowRight className="catalogue-card-arrow" size={20} aria-hidden="true" />
+                </a>
+              );
+            })}
+          </div>
+        </section>)}
 
         {filteredItems.length === 0 && (
           <div className="empty-state">
             <Search size={24} aria-hidden="true" />
             <h3>No matching concepts</h3>
             <p>Try another term or reset the topic filter.</p>
-            <button className="secondary-button" type="button" onClick={() => { setTopic("All topics"); setQuery(""); }}>
+            <button className="secondary-button" type="button" onClick={() => { setField("All fields"); setTopic("All topics"); setQuery(""); }}>
               Reset filters
             </button>
           </div>

@@ -2,7 +2,7 @@
 
 Concept Visualizer is an open-source library of interactive lessons for difficult ideas. Each lesson starts with a concrete example, applies one named operation at a time, and keeps the result visible while you experiment.
 
-The catalogue is organized by field and topic, not by school, course, or textbook. The first collection covers computer graphics.
+The catalogue is organized by field and topic, not by school, course, or textbook. It currently covers computer graphics and signal processing.
 
 ## Catalogue
 
@@ -18,6 +18,18 @@ The catalogue is organized by field and topic, not by school, course, or textboo
 | Rasterization and visibility | Z-Fighting | Compare real depth gaps with stored depth buckets |
 | Images and display | Image Buffers | Change pixel encoding and calculate memory use |
 | Images and display | Frame Timing | Compare application rendering with display scanout |
+
+### Signal processing
+
+| Topic | Lesson | What you can do |
+| --- | --- | --- |
+| Signals and sampling | Digital Signals | Sample and quantize a continuous wave |
+| Signals and sampling | Sampling and Aliasing | Cross the Nyquist limit and inspect the resulting alias |
+| Systems and filters | Convolution | Build each output sample from overlap products |
+| Systems and filters | FIR and IIR Filters | Compare feedforward and feedback filters |
+| Systems and filters | Transfer Functions | Sweep a sinusoid through two frequency responses |
+| Frequency analysis | Sinusoids | Connect a waveform to its complex phasor |
+| Frequency analysis | Fourier and DFT | Mix tones, compute their spectrum, and expose leakage |
 
 ## Run locally
 
@@ -46,6 +58,8 @@ app/
   content/visualizations.ts   public catalogue metadata
   content/foundation-lessons.ts
                               guided copy for shared lessons
+  components/signal/          signal plots and lesson interfaces
+  content/signal-lessons.ts   signal-processing route registry
   learn/[slug]/               stable lesson routes
   lib/                        deterministic concept models
 tests/                        model and edge-case tests
@@ -81,7 +95,7 @@ The same state must drive the picture, live values, and explanation. A finished 
 3. Define the input, operation, visible result, and two or three useful experiments.
 4. Add catalogue metadata in `app/content/visualizations.ts`.
 5. Build and test the pure model in `app/lib/`.
-6. Add a focused lesson component, or use the shared explorer when its structure fits naturally.
+6. Add a focused lesson component, or use a shared explorer when its structure fits naturally.
 7. Check 375, 768, 1024, and 1440 px widths, both themes, keyboard use, and reduced motion.
 8. Update `CHANGELOG.md` and run `npm run check`.
 

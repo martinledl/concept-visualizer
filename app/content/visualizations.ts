@@ -1,5 +1,5 @@
 export type VisualizationStatus = "available" | "planned";
-export type ConceptField = "Computer Graphics";
+export type ConceptField = "Computer Graphics" | "Signal Processing";
 
 export type VisualizationMeta = {
   slug: string;
@@ -21,6 +21,7 @@ export type VisualizationMeta = {
 };
 
 const sourceTitle = "Graphics & Visualization: Principles & Algorithms";
+const signalSourceTitle = "Prerequisites: Signal Processing Reminder";
 
 export const visualizations: VisualizationMeta[] = [
   {
@@ -172,6 +173,111 @@ export const visualizations: VisualizationMeta[] = [
     difficulty: "Foundational",
     interaction: "Inspect the records",
     source: { title: sourceTitle, pages: "30" },
+  },
+  {
+    slug: "digital-signals",
+    number: "01",
+    title: "From Continuous to Digital",
+    shortTitle: "Digital Signals",
+    summary: "Sample a continuous wave, reduce its amplitude levels, and measure what the digital representation loses.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Signals & Sampling",
+    tags: ["Sampling", "Quantization", "Digital signals"],
+    studyMinutes: 10,
+    difficulty: "Foundational",
+    interaction: "Set rate and bit depth",
+    source: { title: signalSourceTitle, pages: "5" },
+  },
+  {
+    slug: "convolution",
+    number: "02",
+    title: "Convolution Workbench",
+    shortTitle: "Convolution",
+    summary: "Flip and shift an impulse response, multiply overlapping samples, and build the output one value at a time.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Systems & Filters",
+    tags: ["LTI systems", "Impulse response", "Convolution"],
+    studyMinutes: 14,
+    difficulty: "Intermediate",
+    interaction: "Scrub the output index",
+    source: { title: signalSourceTitle, pages: "6-13" },
+  },
+  {
+    slug: "fir-iir-filters",
+    number: "03",
+    title: "FIR and IIR Filter Lab",
+    shortTitle: "FIR & IIR Filters",
+    summary: "Send the same signal through feedforward and feedback filters, then inspect their output and impulse response.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Systems & Filters",
+    tags: ["FIR", "IIR", "Stability"],
+    studyMinutes: 13,
+    difficulty: "Intermediate",
+    interaction: "Change filter memory",
+    source: { title: signalSourceTitle, pages: "14-17, 37" },
+  },
+  {
+    slug: "sinusoid-anatomy",
+    number: "04",
+    title: "Sinusoid Anatomy",
+    shortTitle: "Sinusoids",
+    summary: "Connect amplitude, frequency, and phase to a waveform and the rotating complex number that generates it.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Frequency Analysis",
+    tags: ["Sinusoid", "Complex exponential", "Phase"],
+    studyMinutes: 10,
+    difficulty: "Foundational",
+    interaction: "Shape the sinusoid",
+    source: { title: signalSourceTitle, pages: "19-20" },
+  },
+  {
+    slug: "transfer-functions",
+    number: "05",
+    title: "Transfer Function Explorer",
+    shortTitle: "Transfer Functions",
+    summary: "Probe a filter with one sinusoid and see how its frequency response changes amplitude and phase.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Systems & Filters",
+    tags: ["Frequency response", "Eigenfunction", "LTI systems"],
+    studyMinutes: 12,
+    difficulty: "Intermediate",
+    interaction: "Sweep the frequency",
+    source: { title: signalSourceTitle, pages: "21-25" },
+  },
+  {
+    slug: "sampling-aliasing",
+    number: "06",
+    title: "Sampling and Aliasing Lab",
+    shortTitle: "Sampling & Aliasing",
+    summary: "Sample a tone above and below Nyquist, then compare the original with the lower frequency seen by the samples.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Signals & Sampling",
+    tags: ["Nyquist", "Aliasing", "Sample rate"],
+    studyMinutes: 11,
+    difficulty: "Intermediate",
+    interaction: "Cross the Nyquist limit",
+    source: { title: signalSourceTitle, pages: "31-34" },
+  },
+  {
+    slug: "fourier-dft",
+    number: "07",
+    title: "Fourier and DFT Explorer",
+    shortTitle: "Fourier & DFT",
+    summary: "Mix two tones, compute their discrete spectrum, and expose leakage with a non-bin frequency and a window.",
+    status: "available",
+    field: "Signal Processing",
+    topic: "Frequency Analysis",
+    tags: ["Fourier transform", "DFT", "Windowing"],
+    studyMinutes: 15,
+    difficulty: "Intermediate",
+    interaction: "Build and analyze a signal",
+    source: { title: signalSourceTitle, pages: "23-31, 35-36" },
   },
 ];
 

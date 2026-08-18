@@ -38,6 +38,7 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+/tmp/
 
 # local design explorations (final design rules live in design-system/)
 /design-options/

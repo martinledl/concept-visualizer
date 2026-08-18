@@ -9,7 +9,7 @@ Each lesson follows one practical example from input to result. Learners can cha
 ## Current foundation
 
 - A responsive catalogue with field, topic, and search filters.
-- Ten computer graphics lessons.
+- Ten computer graphics lessons and seven signal-processing lessons.
 - Shared light and dark design tokens.
 - Deterministic TypeScript models with unit tests.
 - Static deployment through GitHub Pages.
@@ -20,8 +20,8 @@ Each lesson follows one practical example from input to result. Learners can cha
 1. Add URL state sharing to every lesson that benefits from it.
 2. Add automated responsive and accessibility checks.
 3. Move complex lessons into self-contained concept packages as their boundaries become clear.
-4. Add a second subject area to test whether the catalogue and authoring workflow generalize.
-5. Add content validation for metadata, routes, and source review status.
+4. Add content validation for metadata, routes, and source review status.
+5. Refine shared mathematical plot controls as more signal-based lessons are added.
 
 Accounts, social features, gamification, and a universal visualization builder remain out of scope until there is a clear need.
 

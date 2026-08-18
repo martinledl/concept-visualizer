@@ -4,9 +4,9 @@ import { SiteHeader } from "./components/SiteHeader";
 import { availableCount, visualizations } from "./content/visualizations";
 
 export const metadata: Metadata = {
-  title: "Concept Visualizer · Interactive computer graphics lessons",
+  title: "Concept Visualizer · Interactive lessons",
   description:
-    "Explore rasterization, clipping, depth, image buffers, and the graphics pipeline through interactive visual explanations.",
+    "Explore computer graphics and signal processing through practical, interactive visual explanations.",
 };
 
 export const dynamic = "force-static";
@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <div className="footer-stats">
           <span>{availableCount} interactive lessons</span>
-          <span>More fields coming over time</span>
+          <span>More lessons added over time</span>
           <span>v0.1.0</span>
         </div>
       </footer>

@@ -10,6 +10,8 @@ All notable changes to this project are documented here. The format follows Keep
 - Static export and GitHub Actions deployment for GitHub Pages.
 - Public field-and-topic catalogue with ten complete interactive lessons.
 - Responsive learning layouts for mobile, tablet, and desktop use.
+- A signal-processing field with seven interactive lessons covering digital signals, convolution, filters, sinusoids, transfer functions, aliasing, and the DFT.
+- Tested mathematical models for quantization, convolution, FIR and IIR filters, complex frequency response, alias folding, windows, and the DFT.
 
 ### Changed
 
@@ -20,6 +22,7 @@ All notable changes to this project are documented here. The format follows Keep
 - Reworked the homepage hero and catalogue around a general-purpose concept library.
 - Removed the local OpenAI Sites deployment binding in favor of GitHub Pages.
 - Rebuilt the graphics pipeline lesson around a concrete triangle-and-quad scene with real transforms, clipping, viewport mapping, and rasterization.
+- Grouped the catalogue by field and added field-level filtering.
 
 ## 0.1.0 - 2026-08-17
 

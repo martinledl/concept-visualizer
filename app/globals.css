@@ -1967,11 +1967,41 @@ a {
 }
 
 .catalogue-tools {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 16px 24px;
   margin-top: 26px;
+}
+
+.field-tabs {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-self: start;
+  flex: 0 0 auto;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.field-tab {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field-tab:hover,
+.field-tab.is-active {
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--ink);
 }
 
 .topic-tabs {
@@ -2087,15 +2117,295 @@ a {
   .catalogue-stat { display: none; }
   .field-heading { grid-template-columns: 38px 1fr; }
   .field-heading p { grid-column: 2; }
-  .catalogue-tools { align-items: stretch; flex-direction: column-reverse; }
+  .catalogue-tools { display: flex; align-items: stretch; flex-direction: column; }
   .catalogue-tools .search-box { width: 100%; max-width: none; }
   .topic-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+  .field-tabs { overflow-x: auto; }
+  .field-tab { flex: 0 0 auto; }
   .topic-tab { flex: 0 0 auto; }
   .catalogue-card {
     grid-template-columns: 38px 46px minmax(0, 1fr) 36px;
   }
   .catalogue-card-meta { grid-column: 3; display: flex; flex-wrap: wrap; gap: 12px; }
   .catalogue-card-arrow { grid-column: 4; grid-row: 1 / span 2; }
+}
+
+/* Signal-processing lessons */
+
+.signal-formula {
+  overflow-x: auto;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--primary-ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.signal-canvas {
+  margin-top: 12px;
+}
+
+.signal-scene {
+  min-height: 360px;
+  padding: 14px 16px 18px;
+  background: var(--surface-soft);
+}
+
+.signal-plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.signal-axis {
+  stroke: var(--grid-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.signal-grid-line {
+  stroke: var(--grid);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.signal-axis-label,
+.phasor-panel text {
+  fill: var(--ink-faint);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+}
+
+.signal-line {
+  fill: none;
+  stroke-width: 2.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.signal-line.is-dashed {
+  stroke-dasharray: 6 5;
+}
+
+.tone-primary { color: var(--primary); stroke: var(--primary); }
+.tone-coral { color: var(--coral); stroke: var(--coral); }
+.tone-muted { color: var(--ink-faint); stroke: var(--ink-faint); }
+.tone-success { color: var(--success); stroke: var(--success); }
+
+.signal-stem {
+  stroke: currentColor;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.signal-point {
+  fill: currentColor;
+  stroke: var(--surface-soft);
+  stroke-width: 1.5;
+}
+
+.signal-series .is-highlighted {
+  color: var(--coral);
+}
+
+.plot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 3px 8px 8px;
+  color: var(--ink-soft);
+  font-size: 10px;
+}
+
+.plot-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.plot-legend span::before {
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  content: "";
+}
+
+.legend-primary { color: var(--primary); }
+.legend-coral { color: var(--coral); }
+.legend-muted { color: var(--ink-faint); }
+
+.signal-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  align-items: end;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--surface);
+}
+
+.signal-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 9px;
+  background: var(--surface-soft);
+}
+
+.signal-choice button {
+  min-height: 40px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.signal-choice button.is-active {
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--primary-ink);
+}
+
+.mini-plot-grid,
+.transfer-grid,
+.fourier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mini-plot-grid > div,
+.transfer-grid > div,
+.fourier-grid > div,
+.sub-plot,
+.phasor-panel {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.mini-plot-grid > div > span,
+.transfer-grid > div > span,
+.fourier-grid > div > span,
+.sub-plot > span,
+.phasor-panel > span {
+  display: block;
+  padding: 9px 12px 0;
+  color: var(--ink-faint);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+}
+
+.sub-plot {
+  margin-top: 10px;
+}
+
+.spectrum-bar {
+  fill: color-mix(in srgb, var(--primary) 70%, transparent);
+}
+
+.spectrum-bar.is-highlighted {
+  fill: var(--coral);
+}
+
+.sinusoid-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 12px;
+}
+
+.wave-panel {
+  min-width: 0;
+}
+
+.phasor-panel svg {
+  display: block;
+  width: 100%;
+  max-width: 210px;
+  margin: 2px auto 10px;
+}
+
+.phasor-circle {
+  fill: none;
+  stroke: var(--grid);
+  stroke-width: 1;
+}
+
+.phasor-vector {
+  stroke: var(--coral);
+  stroke-width: 3;
+}
+
+.phasor-point {
+  fill: var(--coral);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+
+@media (max-width: 1180px) {
+  .signal-lesson-shell {
+    grid-template-columns: 210px minmax(520px, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .signal-lesson-shell {
+    display: block;
+  }
+
+  .signal-scene {
+    min-height: 300px;
+    padding-inline: 10px;
+  }
+
+  .signal-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .field-tabs {
+    flex-wrap: wrap;
+    margin-inline: -2px;
+    overflow: visible;
+  }
+
+  .signal-formula {
+    font-size: 12px;
+  }
+
+  .signal-controls,
+  .mini-plot-grid,
+  .transfer-grid,
+  .fourier-grid,
+  .sinusoid-scene {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-scene {
+    min-height: 260px;
+    padding: 10px 5px 12px;
+  }
+
+  .signal-choice button {
+    min-height: 44px;
+  }
+
+  .phasor-panel svg {
+    max-width: 170px;
+  }
 }
 
 @media (max-width: 600px) {
